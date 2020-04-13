@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Calendario from './CalendarioComponent';
 import Home from './HomeComponent';
+import Contacto from './ContactoComponent';
+import QuienesSomos from './QuienesSomosComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -60,6 +62,50 @@ function HomeNavegador() {
     </Stack.Navigator>
   );
 }
+function ContactoNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Contacto"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+      }}
+    >
+      <Stack.Screen
+        name="Contacto"
+        component={Contacto}
+        options={{
+          title: 'Contacto',
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+function HistoriaNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Historia"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+      }}
+    >
+      <Stack.Screen
+        name="Historia"
+        component={QuienesSomos}
+        options={{
+          title: 'Quiénes somos',
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
 
 function DrawerNavegador() {
   return (
@@ -67,10 +113,12 @@ function DrawerNavegador() {
       drawerStyle={{
         backgroundColor: '#c2d3da',
       }}
-      initialRouteName="Home"
-      >
-        <Drawer.Screen name="Home" component={HomeNavegador} />
+      initialRouteName="Home">
+        <Drawer.Screen name="Campo Base" component={HomeNavegador} />
+        <Drawer.Screen name="Quiénes somos" component={HistoriaNavegador} />
         <Drawer.Screen name="Calendario" component={CalendarioNavegador} />
+        <Drawer.Screen name="Contacto" component={ContactoNavegador} />
+
       </Drawer.Navigator>
   );
 }
