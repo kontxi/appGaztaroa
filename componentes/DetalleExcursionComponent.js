@@ -3,6 +3,8 @@ import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { EXCURSIONES } from '../comun/excursiones';
 import { COMENTARIOS } from '../comun/comentarios';
+import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
+
 
 function RenderExcursion(props) {
 
@@ -12,7 +14,7 @@ function RenderExcursion(props) {
         return(
             <Card
             featuredTitle={excursion.nombre}
-            image={require('./imagenes/40Años.png')}>
+            image={{uri: baseUrl + excursion.imagen}}>
                 <Text style={{margin: 10}}>
                     {excursion.descripcion}
                 </Text>

@@ -4,7 +4,7 @@ import { Card } from 'react-native-elements';
 import { EXCURSIONES } from '../comun/excursiones';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
-
+import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 
 function RenderItem(props) {
 
@@ -14,7 +14,7 @@ function RenderItem(props) {
             return(
                 <Card
                     featuredTitle={item.nombre}
-                    image={require('./imagenes/40Años.png')}>
+                    image={{uri: baseUrl + item.imagen}}>
                     <Text
                         style={{margin: 10}}>
                         {item.descripcion}</Text>
@@ -45,7 +45,7 @@ class Home extends Component {
                 <RenderItem item={this.state.cabeceras.filter((cabecera) => cabecera.destacado)[0]} />
                 <RenderItem item={this.state.excursiones.filter((excursion) => excursion.destacado)[0]} />
                 <RenderItem item={this.state.actividades.filter((actividad) => actividad.destacado)[0]} />
-                
+
             </ScrollView>
         );
     }

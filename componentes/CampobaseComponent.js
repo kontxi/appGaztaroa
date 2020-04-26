@@ -12,6 +12,7 @@ import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import { StyleSheet } from 'react-native';
+import { colorGaztaroaClaro,colorGaztaroaOscuro} from '../comun/comun';
 
 
 const Stack = createStackNavigator();
@@ -24,7 +25,7 @@ function CalendarioNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -52,7 +53,7 @@ function HomeNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro},
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -74,7 +75,7 @@ function ContactoNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro},
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -96,7 +97,7 @@ function HistoriaNavegador({navigation}) {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
 }}
@@ -138,7 +139,7 @@ function DrawerNavegador() {
   return (
       <Drawer.Navigator
       drawerStyle={{
-        backgroundColor: '#c2d3da',
+        backgroundColor: colorGaztaroaClaro,
       }}
       initialRouteName="Home"
       drawerContent={props=><CustomDrawerContent{...props}/>}
@@ -199,7 +200,7 @@ class Campobase extends Component {
       <View style={{flex:1, paddingTop: Platform.OS === 'android' ? 0 : Constants.statusBarHeight }}>
 
             <DrawerNavegador Style={{
-                    backgroundColor: '#c2d3da',
+                    backgroundColor: colorGaztaroaClaro,
                   }}
                   initialRouteName="Home"
 
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: '#015afc',
+    backgroundColor: colorGaztaroaOscuro,
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',

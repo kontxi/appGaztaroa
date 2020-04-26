@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, Text, ScrollView } from 'react-native';
 import { ListItem, Card } from 'react-native-elements';
 import { ACTIVIDADES } from '../comun/actividades';
+import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 
 
 function Historia() {
@@ -46,7 +47,7 @@ class QuienesSomos extends Component {
                         title={item.nombre}
                         subtitle={item.descripcion}
                         hideChevron={true}
-                        leftAvatar={{ source: require('./imagenes/40Años.png')}}
+                        leftAvatar={{ source: { uri: baseUrl + item.imagen } }}
                     />
 
             );
