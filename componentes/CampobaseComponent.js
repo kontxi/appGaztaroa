@@ -13,6 +13,26 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import { StyleSheet } from 'react-native';
 import { colorGaztaroaClaro,colorGaztaroaOscuro} from '../comun/comun';
+import {connect} from 'react-redux';
+import {fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades} from '../redux/ActionCreators';
+
+
+const mapStateToProps = state=>{
+  return{
+    excursiones: state.excursiones,
+    comentarios: state.comentarios,
+    cabeceras: state.cabeceras,
+    actividades: state.actividades
+  }
+}
+
+const mapDispatchToProps = dispatch =>({
+  fetchExcursiones: () => dispatch(fetchExcursiones()),
+  fetchComentarios: () => dispatch(fetchComentarios()),
+  fetchCabeceras: () => dispatch(fetchCabeceras()),
+  fetchActividades: () => dispatch (fetchActividades()),
+})
+
 
 
 const Stack = createStackNavigator();
@@ -192,7 +212,12 @@ function DrawerNavegador() {
 
 
 class Campobase extends Component {
-
+  componentDidMount(){
+    this.props.fetchExcursiones();
+    this.props.fetchComentarios();
+    this.props.fetchCabeceras();
+    this.props.fetchActividades();
+  }
   render() {
 
     return (
@@ -243,4 +268,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Campobase;
+export default connect(mapStateToProps,mapDispatchToProps)(Campobase);

@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { FlatList, Text, ScrollView } from 'react-native';
 import { ListItem, Card } from 'react-native-elements';
-import { ACTIVIDADES } from '../comun/actividades';
-import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 
+import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
+import {connect} from 'react-redux';
+import {fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades} from '../redux/ActionCreators';
+
+
+
+const mapStateToProps=state=>{
+  return{
+    actividades: state.actividades
+  }
+}
 
 function Historia() {
 
@@ -27,13 +36,7 @@ function Historia() {
 
 
 class QuienesSomos extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            actividades: ACTIVIDADES,
 
-        };
-    }
 
     render(){
         const { navigate } = this.props.navigation;
@@ -61,7 +64,7 @@ class QuienesSomos extends Component {
 
           <FlatList
 
-              data={this.state.actividades}
+              data={this.props.actividades.actividades}
               renderItem={renderCalendarioItem}
               keyExtractor={item => item.id.toString()}
 
@@ -76,4 +79,4 @@ class QuienesSomos extends Component {
 
 }
 
-export default QuienesSomos;
+export default connect(mapStateToProps)(QuienesSomos);

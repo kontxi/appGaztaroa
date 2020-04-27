@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { EXCURSIONES } from '../comun/excursiones';
 import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
+import {connect} from 'react-redux';
+import {fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades} from '../redux/ActionCreators';
+
+const mapStateToProps=state=>{
+  return{
+    excursiones:state.excursiones
+  }
+}
 
 class Calendario extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            excursiones: EXCURSIONES,
 
-        };
-    }
 
     render(){
         const { navigate } = this.props.navigation;
@@ -31,7 +32,7 @@ class Calendario extends Component {
 
         return (
             <FlatList
-                data={this.state.excursiones}
+                data={this.props.excursiones.excursiones}
                 renderItem={renderCalendarioItem}
                 keyExtractor={item => item.id.toString()}
                 />
@@ -39,4 +40,4 @@ class Calendario extends Component {
     };
 }
 
-export default Calendario;
+export default connect(mapStateToProps)(Calendario);
