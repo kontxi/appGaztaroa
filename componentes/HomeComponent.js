@@ -4,7 +4,6 @@ import { Card } from 'react-native-elements';
 
 import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 import {connect} from 'react-redux';
-import {fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades} from '../redux/ActionCreators';
 
 
 const mapStateToProps=state=>{
