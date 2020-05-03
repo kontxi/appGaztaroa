@@ -141,3 +141,33 @@ export const addActividades = (actividades) => ({
     type: ActionTypes.ADD_ACTIVIDADES,
     payload: actividades
 });
+
+export const fetchFavoritos = () => (dispatch) => {
+    return fetch(baseUrl + 'favoritos')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(favoritos => dispatch(addFavorito(favoritos)))
+    .catch(error => dispatch(favoritosFailed(error.message)));
+};
+export const postFavorito = (excursionId)  => (dispatch) => {
+    setTimeout(() => {
+        dispatch(addFavorito(excursionId));
+    }, 2000);
+};
+
+export const addFavorito = (excursionId) => ({
+    type: ActionTypes.ADD_FAVORITO,
+    payload: excursionId
+});

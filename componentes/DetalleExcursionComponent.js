@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-
+import { postFavorito } from '../redux/ActionCreators';
 import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 import {connect} from 'react-redux';
 
 const mapStateToProps=state=>{
   return{
     excursiones:state.excursiones,
-    comentarios:state.comentarios
+    comentarios:state.comentarios,
+    favoritos:state.favoritos,
+
   }
 }
+const mapDispatchToProps = dispatch => ({
+    postFavorito: (excursionId) => dispatch(postFavorito(excursionId))
+})
 
 function RenderExcursion(props) {
 
     const excursion = props.excursion;
+
 
     if (excursion != null) {
         return(
@@ -75,27 +81,24 @@ function RenderComentario(props){
 
 
 class DetalleExcursion extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
 
-            favoritos:[]
-        };
-    }
     marcarFavorito(excursionId){
-      this.setState({favoritos:this.state.favoritos.concat(excursionId)});
-    }
+      this.props.postFavorito(excursionId);
+     }
 
     render(){
       const {excursionId} = this.props.route.params;
+
+
+
       return(
             <ScrollView>
-                <RenderExcursion
-                    excursion={this.props.excursiones.excursiones[+excursionId]}
-                    favorita={this.state.favoritos.some(el => el === excursionId)}
-                    onPress={() => this.marcarFavorito(excursionId)}
+            <RenderExcursion
+                excursion={this.props.excursiones.excursiones[+excursionId]}
+                favorita={this.props.favoritos.some(el => el === excursionId)}
+                onPress={() => this.marcarFavorito(excursionId)}
+              />
 
-                />
                 <RenderComentario
                     comentarios={this.props.comentarios.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
                 />
@@ -105,4 +108,4 @@ class DetalleExcursion extends Component {
         }
     }
 
-export default connect(mapStateToProps) (DetalleExcursion);
+    export default connect(mapStateToProps, mapDispatchToProps)(DetalleExcursion);

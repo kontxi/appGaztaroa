@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ScrollView,View} from 'react-native';
 import { ListItem } from 'react-native-elements';
 import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 import {connect} from 'react-redux';
+import {IndicadorActividad} from '../componentes/IndicadorActividadComponent';
+
 
 const mapStateToProps=state=>{
   return{
     excursiones:state.excursiones
   }
 }
+
+
+
 
 class Calendario extends Component {
 
@@ -29,13 +34,36 @@ class Calendario extends Component {
             );
         }
 
-        return (
-            <FlatList
-                data={this.props.excursiones.excursiones}
-                renderItem={renderCalendarioItem}
-                keyExtractor={item => item.id.toString()}
-                />
-        );
+
+
+          if (this.props.excursiones.isLoading) {
+              return(
+                  <IndicadorActividad />
+              );
+          }
+
+          else if (this.props.excursiones.errMess) {
+              return(
+                  <View>
+                      <Text>{props.errMess}</Text>
+                  </View>
+              );
+          }
+
+                    else {
+
+
+                    return (
+                      <FlatList
+                          data={this.props.excursiones.excursiones}
+                          renderItem={renderCalendarioItem}
+                          keyExtractor={item => item.id.toString()}
+                          />
+                    );
+
+          }
+
+        
     };
 }
 

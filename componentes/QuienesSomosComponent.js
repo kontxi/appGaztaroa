@@ -5,11 +5,45 @@ import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
+import {IndicadorActividad} from '../componentes/IndicadorActividadComponent';
+
 
 const mapStateToProps = state => {
     return {
       actividades: state.actividades
     }
+  }
+
+
+
+  function RenderItem(props) {
+          const item = props.item;
+          if (props.isLoading) {
+              return(
+                  <IndicadorActividad />
+              );
+          }
+          else if (props.errMess) {
+              return(
+                  <View>
+                      <Text>{props.errMess}</Text>
+                  </View>
+              );
+          }
+                    else {
+                    if (item != null) {
+                        return(
+                          <FlatList
+                          data={this.props.actividades.actividades}
+                          renderItem={renderActividadItem}
+                          keyExtractor={item => item.id.toString()}
+                          />
+                        );
+                    }
+                    else {
+                        return(<View></View>);
+                    }
+          }
   }
 
 function Historia() {
@@ -47,14 +81,11 @@ class QuienesSomos extends Component {
             <ScrollView>
                 <Historia />
                 <Card title="Actividades y recursos">
-                    <FlatList
-                    data={this.props.actividades.actividades}
-                    renderItem={renderActividadItem}
-                    keyExtractor={item => item.id.toString()}
-                    />
+                   <IndicadorActividad/>
                 </Card>
             </ScrollView>
         );
+    
     }
 }
 
