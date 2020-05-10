@@ -18,7 +18,7 @@ export const fetchComentarios = () => (dispatch) => {
       })
     .then(response => response.json())
     .then(comentarios => dispatch(addComentarios(comentarios)))
-  
+
     .catch(error => dispatch(comentariosFailed(error.message)));
 };
 
@@ -173,15 +173,22 @@ export const fetchFavoritos = () => (dispatch) => {
       })
     .then(response => response.json())
     .then(favoritos => dispatch(addFavorito(favoritos)))
+    .then(favoritos => dispatch(borrarFavorito(favoritos)))
     .catch(error => dispatch(favoritosFailed(error.message)));
 };
 export const postFavorito = (excursionId)  => (dispatch) => {
     setTimeout(() => {
         dispatch(addFavorito(excursionId));
     }, 2000);
+    console.log(excursionId)
 };
 
 export const addFavorito = (excursionId) => ({
     type: ActionTypes.ADD_FAVORITO,
     payload: excursionId
+});
+export const borrarFavorito = (excursionID) => ({
+  
+    type: ActionTypes.BORRAR_FAVORITO,
+    payload: excursionID
 });

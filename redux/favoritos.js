@@ -8,6 +8,13 @@ export const favoritos = (state = [], action) => {
             else
                 return state.concat(action.payload);
 
+
+          case ActionTypes.BORRAR_FAVORITO:
+             if(el => el !== action.payload)
+             return state.slice(action.payload);
+             else
+             return state;
+
         default:
           return state;
       }

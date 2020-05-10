@@ -112,7 +112,7 @@ class DetalleExcursion extends Component {
 
       }
   }
-  gestionarComentario(excursionId,valor){
+  gestionarComentario(excursionId){
     console.log(JSON.stringify(this.state));
     var date = new Date().getDate(); //Current Date
      var month = new Date().getMonth() + 1; //Current Month
