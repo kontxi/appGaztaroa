@@ -18,6 +18,7 @@ export const fetchComentarios = () => (dispatch) => {
       })
     .then(response => response.json())
     .then(comentarios => dispatch(addComentarios(comentarios)))
+  
     .catch(error => dispatch(comentariosFailed(error.message)));
 };
 
@@ -29,6 +30,19 @@ export const comentariosFailed = (errmess) => ({
 export const addComentarios = (comentarios) => ({
     type: ActionTypes.ADD_COMENTARIOS,
     payload: comentarios
+});
+
+export const postComentario = (comentario)  => (dispatch) => {
+
+    setTimeout(() => {
+        dispatch(addComentario(comentario));
+    }, 2000);
+};
+
+export const addComentario = (comentario) => ({
+
+    type: ActionTypes.ADD_COMENTARIO,
+    payload: comentario
 });
 
 export const fetchExcursiones = () => (dispatch) => {
