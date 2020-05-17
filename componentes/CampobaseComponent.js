@@ -15,6 +15,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 import { connect } from 'react-redux';
+
+import { postFavorito, postComentario } from '../redux/ActionCreators';
 import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {

@@ -16,35 +16,7 @@ const mapStateToProps = state => {
 
 
 
-  function RenderItem(props) {
-          const item = props.item;
-          if (props.isLoading) {
-              return(
-                  <IndicadorActividad />
-              );
-          }
-          else if (props.errMess) {
-              return(
-                  <View>
-                      <Text>{props.errMess}</Text>
-                  </View>
-              );
-          }
-                    else {
-                    if (item != null) {
-                        return(
-                          <FlatList
-                          data={this.props.actividades.actividades}
-                          renderItem={renderActividadItem}
-                          keyExtractor={item => item.id.toString()}
-                          />
-                        );
-                    }
-                    else {
-                        return(<View></View>);
-                    }
-          }
-  }
+
 
 function Historia() {
         return(
@@ -75,17 +47,49 @@ class QuienesSomos extends Component {
                     leftAvatar={{source: {uri: baseUrl + item.imagen}}}
                     />
             );
-        };
+        }
 
-        return(
-            <ScrollView>
-                <Historia />
-                <Card title="Actividades y recursos">
-                   <IndicadorActividad/>
+        if (this.props.actividades.isLoading) {
+            return(
+              <ScrollView>
+               <Historia/>
+                <Card
+                title='Actividades y recursos'>
+
+               <IndicadorActividad/>
                 </Card>
-            </ScrollView>
+              </ScrollView>
+            );
+        }
+        else if (this.props.actividades.errMess) {
+            return(
+                <View>
+                    <Text>{props.errMess}</Text>
+                </View>
+            );
+        }
+        else{
+          return(
+          <ScrollView>
+           <Historia/>
+            <Card
+            title='Actividades y recursos'>
+
+            <FlatList
+
+              data={this.props.actividades.actividades}
+                renderItem={renderActividadItem}
+                keyExtractor={item => item.id.toString()}
+
+                />
+            </Card>
+          </ScrollView>
         );
-    
+
+        }
+
+
+
     }
 }
 

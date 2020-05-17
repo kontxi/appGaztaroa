@@ -73,7 +73,7 @@ class VistaFavoritos extends Component {
                         title={item.nombre}
                         subtitle={item.descripcion}
                         hideChevron={true}
-                        onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
+                        onPress={() =>console.log(item.id), navigate('DetalleExcursion', { excursionId: item.id })}
                         leftAvatar={{ source: { uri: baseUrl + item.imagen } }}
                     />
                 </Swipeout>

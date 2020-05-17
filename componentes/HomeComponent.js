@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements';
 import {IndicadorActividad} from '../componentes/IndicadorActividadComponent';
 import {baseUrl,colorGaztaroaOscuro,colorGaztaroaClaro} from '../comun/comun';
 import {connect} from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 
 
 const mapStateToProps=state=>{
@@ -41,9 +42,8 @@ function RenderItem(props) {
                           <Card
                               featuredTitle={item.nombre}
                               image={{uri: baseUrl + item.imagen}}>
-                              <Text
-                                  style={{margin: 10}}>
-                                  {item.descripcion}</Text>
+
+                                  <Animatable.Text animation="slideInDown" iterationCount={3} direction="alternate">{item.descripcion}</Animatable.Text>
                           </Card>
                       );
                   }
