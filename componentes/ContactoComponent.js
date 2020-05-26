@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View, StatusBar, StyleSheet } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card,Button, Icon } from 'react-native-elements';
 import Constants from 'expo-constants';
+import { colorGaztaroaOscuro } from '../comun/comun';
 import TextAnimator from '../componentes/TextAnimator';
 import * as Animatable from 'react-native-animatable';
+import * as MailComposer from 'expo-mail-composer';
+
+
 
 class Contacto extends Component {
+
+  sendMail(){
+    MailComposer.composeAsync({
+        recipients:['gaztaroa@gaztaroa.com'],
+        subject:'Parte hartu / Participar',
+        body:'Kaixo gaztaroa! Email hau idazten dut... '
+    });
+  }
 
   handleViewRef = ref => this.view = ref;
 
@@ -35,6 +47,12 @@ class Contacto extends Component {
                        Tel: +34 948 277151{'\n'}{'\n'}
                        Email: gaztaroa@gaztaroa.com
                     </Text>
+                    <Button
+                      title=' Bidali mezua / Enviar correo'
+                      buttonStyle={{backgroundColor:colorGaztaroaOscuro}}
+                      icon={<Icon name='envelope-o' type='font-awesome' color='white' />}
+                      onPress={this.sendMail}
+                    />
                 </Card>
 
 

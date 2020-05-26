@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button,Platform } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { colorGaztaroaOscuro } from '../comun/comun';
 import {Modal} from 'react-native';
+import * as Calendar from 'expo-calendar';
 
 class PruebaEsfuerzo extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            edad: 18,
-            federado: false,
-            fecha: '',
-            showModal:false
-        }
-    }
+  
 
     gestionarReserva() {
         console.log(JSON.stringify(this.state));
@@ -31,6 +23,8 @@ resetForm(){
 }
 toggleModal(){
   this.setState({showModal:!this.state.showModal});
+
+
 }
     render() {
         return(

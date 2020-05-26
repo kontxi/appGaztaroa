@@ -6,6 +6,8 @@ import { ListItem } from 'react-native-elements';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
 import {IndicadorActividad} from '../componentes/IndicadorActividadComponent';
+import NetInfo from "@react-native-community/netinfo";
+import {useNetInfo} from "@react-native-community/netinfo";
 
 
 const mapStateToProps = state => {
@@ -15,7 +17,17 @@ const mapStateToProps = state => {
   }
 
 
+  const YourComponent = () => {
+    const netInfo = useNetInfo();
 
+    return (
+      <View>
+        <Text>Type: {netInfo.type}</Text>
+        <Text>Is Connected? {netInfo.isConnected.toString()}</Text>
+
+      </View>
+    );
+  };
 
 
 function Historia() {
@@ -35,6 +47,12 @@ function Historia() {
 
 class QuienesSomos extends Component {
 
+
+
+
+
+
+
     render() {
 
         const renderActividadItem = ({item, index}) => {
@@ -44,7 +62,7 @@ class QuienesSomos extends Component {
                     title={item.nombre}
                     subtitle={item.descripcion}
                     hideChevron={true}
-                    leftAvatar={{source: {uri: baseUrl + item.imagen}}}
+                    leftAvatar={{source: {uri:item.imagen}}}
                     />
             );
         }
@@ -52,6 +70,7 @@ class QuienesSomos extends Component {
         if (this.props.actividades.isLoading) {
             return(
               <ScrollView>
+              <YourComponent/>
                <Historia/>
                 <Card
                 title='Actividades y recursos'>

@@ -41,7 +41,7 @@ function RenderItem(props) {
                       return(
                           <Card
                               featuredTitle={item.nombre}
-                              image={{uri: baseUrl + item.imagen}}>
+                              image={{uri:item.imagen}}>
 
                                   <Animatable.Text animation="slideInDown" iterationCount={3} direction="alternate">{item.descripcion}</Animatable.Text>
                           </Card>

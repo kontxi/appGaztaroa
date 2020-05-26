@@ -1,13 +1,14 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../comun/comun';
 
+
 export const fetchComentarios = () => (dispatch) => {
-    return fetch(baseUrl + 'comentarios')
+    return fetch('https://appgaztaroa.firebaseio.com/comentarios.json')
     .then(response => {
         if (response.ok) {
           return response;
         } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          var error = new Error('Error comentarios ' + response.status + ': ' + response.statusText);
           error.response = response;
           throw error;
         }
@@ -49,12 +50,12 @@ export const fetchExcursiones = () => (dispatch) => {
 
     dispatch(excursionesLoading());
 
-    return fetch(baseUrl + 'excursiones')
+    return fetch('https://appgaztaroa.firebaseio.com/excursiones.json')
     .then(response => {
         if (response.ok) {
           return response;
         } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          var error = new Error('Error excursiones ' + response.status + ': ' + response.statusText);
           error.response = response;
           throw error;
         }
@@ -86,12 +87,12 @@ export const fetchCabeceras = () => (dispatch) => {
 
     dispatch(cabecerasLoading());
 
-    return fetch(baseUrl + 'cabeceras')
+    return fetch('https://appgaztaroa.firebaseio.com/cabeceras.json')
     .then(response => {
         if (response.ok) {
             return response;
         } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            var error = new Error('Error cabeceras' + response.status + ': ' + response.statusText);
             error.response = response;
             throw error;
         }
@@ -123,12 +124,12 @@ export const fetchActividades = () => (dispatch) => {
 
     dispatch(actividadesLoading());
 
-    return fetch(baseUrl + 'actividades')
+    return fetch('https://appgaztaroa.firebaseio.com/actividades.json')
     .then(response => {
         if (response.ok) {
             return response;
         } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            var error = new Error('Error actividades ' + response.status + ': ' + response.statusText);
             error.response = response;
             throw error;
         }
@@ -188,7 +189,7 @@ export const addFavorito = (excursionId) => ({
     payload: excursionId
 });
 export const borrarFavorito = (excursionID) => ({
-  
+
     type: ActionTypes.BORRAR_FAVORITO,
     payload: excursionID
 });

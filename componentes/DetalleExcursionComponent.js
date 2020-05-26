@@ -38,7 +38,7 @@ function RenderExcursion(props) {
         return false;
 }
     const reconocerDragIzquierdaDerecha = ({ moveX, moveY, dx, dy }) => {
-    if ( dx > -50 )
+    if ( dx > 50 )
         return true;
     else
         return false;
@@ -58,7 +58,7 @@ const panResponder = PanResponder.create({
       },
       onPanResponderEnd: (e, gestureState) => {
               console.log("PanResponder finalizado", gestureState);
-              if (reconocerDragDerechaIzquierda(gestureState) || reconocerDragIzquierdaDerecha(gestureState))
+              if (reconocerDragDerechaIzquierda(gestureState))
                   Alert.alert(
                       'Añadir favorito',
                       'Confirmar que desea añadir' + excursion.nombre + ' a favoritos:',
@@ -68,6 +68,12 @@ const panResponder = PanResponder.create({
                       ],
                       { cancelable: false }
                   );
+                  if (reconocerDragIzquierdaDerecha(gestureState)){
+                      props.onPress1()};
+
+
+
+
 
         return true;
       }
@@ -85,7 +91,7 @@ const panResponder = PanResponder.create({
 
             <Card
             featuredTitle={excursion.nombre}
-            image={{uri: baseUrl + excursion.imagen}}>
+            image={{uri:excursion.imagen}}>
                 <Text style={{margin: 10}}>
                     {excursion.descripcion}
                 </Text>
@@ -101,10 +107,10 @@ const panResponder = PanResponder.create({
                         <Icon
                                 raise
                                 reverse
-                                name={ props.comentario ? 'pencil' : 'pencil'}
+                                name={'pencil'}
                                 type='font-awesome'
                                 color='#015afc'
-                                onPress={() => props.comentario ? console.log('Añde tu comentario') : props.onPress()}
+                                onPress={() => props.onPress1()}
 
                         />
                     </View>
@@ -192,7 +198,9 @@ class DetalleExcursion extends Component {
     this.setState({
       showModal:false,
       comentario:"",
-      autor:""
+      autor:"",
+      dia:"",
+      valoracion:"",
 
     });
   }
@@ -214,6 +222,8 @@ class DetalleExcursion extends Component {
      }
 
 
+
+
     render(){
       const {excursionId} = this.props.route.params;
       const { rating } = this.props;
@@ -224,18 +234,20 @@ class DetalleExcursion extends Component {
             <RenderExcursion
                 excursion={this.props.excursiones.excursiones[+excursionId]}
                 favorita={this.props.favoritos.some(el => el === excursionId)}
-                onPress={() => {this.marcarFavorito(excursionId); this.toggleModal(this.state.showModal);}}
+                onPress={() => {this.marcarFavorito(excursionId)}}
+                onPress1={() => {this.toggleModal()}}
+
 
               />
 
                 <RenderComentario
                     comentarios={this.props.comentarios.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
-                    
+
                 />
                 <Modal animationType = {"slide"} transparent = {false}
                     visible = {this.state.showModal}
-                    onDismiss = {() => {this.toggleModal(); this.resetForm();}}
-                    onRequestClose = {() => {this.toggleModal(); this.resetForm();}}>
+                    onDismiss = {() => {this.resetForm();}}
+                    onRequestClose = {() => { this.resetForm();}}>
                     <View style = {styles.modal}>
 
                     <Rating
