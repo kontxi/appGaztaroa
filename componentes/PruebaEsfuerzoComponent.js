@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Modal } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { colorGaztaroaOscuro } from '../comun/comun';
+import * as Calendar from 'expo-calendar';
 
 class PruebaEsfuerzo extends Component {
 

@@ -17,6 +17,7 @@ import Constants from 'expo-constants';
 import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 import { connect } from 'react-redux';
 import NetInfo,{useNetInfo} from "@react-native-community/netinfo";
+import Localizacion from "./Localizacion";
 
 
 import { postFavorito, postComentario } from '../redux/ActionCreators';
@@ -248,7 +249,28 @@ function GaleriaNavegador({ navigation }) {
 }
 
 
-
+function LocalizacionNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Localizacion"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
+      }}
+    >
+      <Stack.Screen
+        name="Localizacion"
+        component={Localizacion}
+        options={{
+          title: 'Localizacion',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function CustomDrawerContent(props) {
   const [isInternetReachable, setIsInternetReachable]=useState(false);
@@ -395,7 +417,18 @@ function DrawerNavegador() {
             )
             }}
         />
-
+        <Drawer.Screen name="Localizacion" component={LocalizacionNavegador}
+          options={{
+              drawerIcon: ({ tintColor}) => (
+                <Icon
+                name='map-marker'
+                type='font-awesome'
+                size={24}
+                color={tintColor}
+                />
+              )
+              }}
+          />
 
       </Drawer.Navigator>
   );
